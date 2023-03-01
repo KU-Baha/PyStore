@@ -1,9 +1,17 @@
+import sqlite3
+from pprint import pprint
+
 from shop.models import Product, Category
 
-phone = Category('Phones')
 
-iphone15 = Product('Iphone 15 black', 'Apple', 'iphone 15', 990, 'black', 256, category=phone)
-samsung = Product('Samsung S23', 'Samsung', 'S23', 850, 'white', 512, category=phone)
+con = sqlite3.connect("database.db")
+cur = con.cursor()
 
-print(iphone15.__dict__)
-print(samsung.__dict__)
+# macbook = Product("Macbook AIR", 'Apple', 'Macbook', 1000)
+# macbook.save_to_db(cur)
+
+cur.execute("""UPDATE product SET (category_id)=(Null)""")
+con.commit()
+
+cur.execute("""SELECT * FROM product""")
+pprint(cur.fetchall())

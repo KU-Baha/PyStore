@@ -1,9 +1,6 @@
 class Product:
-    def __init__(self, name: str, brand: str, model: str, price: int = 0, color: str = None, memory: int = 0,
-                 category=None):
+    def __init__(self, name: str, brand: str, model: str, price: int = 0, category=None):
         self.name = name
-        self.color = color
-        self.memory = memory
         self.brand = brand
         self.model = model
         self.price = price
@@ -11,6 +8,9 @@ class Product:
 
     def __repr__(self):
         return self.name
+
+    def save_to_db(self, cur):
+        cur.execute(f"""INSERT INTO product VALUES (Null, '{self.name}', '{self.brand}', '{self.model}', {self.price}, Null)""")
 
 
 class Category:
